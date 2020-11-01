@@ -1,0 +1,22 @@
+<!-- 虽然没有写views，也得写模板 -->
+{%extends "learning_logs/base.html"%}
+{%load bootstrap3%}
+{%bootstrap_css%}
+{%bootstrap_javascript%}
+
+
+{% block header %}
+<h2>Log in to you account</h2>
+{% endblock header%}
+
+{% block content %}
+<form class="form" action="{% url 'users:login' %} " method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {%buttons%}
+        <button name="submit" class="btn btn-primary">log in</button>
+    {%endbuttons%}
+    <input type="hidden" name='next' value="{% url 'learning_logs:topics' %}"/>
+</form>
+<p>No account，<a href="{% url 'users:register' %}">register.</a></p>
+{% endblock content %}

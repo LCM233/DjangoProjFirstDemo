@@ -1,0 +1,31 @@
+{%extends "learning_logs/base.html"%}
+
+{%load bootstrap3%}
+
+{%block header%}
+    <h2>{{topic}}</h2>
+{%endblock header%}
+
+{%block content%}
+    <p>
+        <a href="{%url 'learning_logs:new_entry' topic.id%}">Add new entry</a>
+    </p>
+
+    {%for entry in entries%}
+        <div class="panel panel-default">
+            <div class="panel-heading form-inline">
+                <h4>
+                    {{entry.date_added|date:'M d, Y H:i'}}
+                    <small>
+                        <div class="text-right"><a href="{%url 'learning_logs:edit_entry' entry.id%}">Edit entry</a></div>
+                    </small>
+                </h4>
+            </div>
+            <div class="panel-body">
+                {{entry.text|linebreaks}}
+            </div>
+        </div>
+        {%empty%}
+        <h4>There are no entries for this topic yet.</h4>
+    {%endfor%}
+{%endblock content%}

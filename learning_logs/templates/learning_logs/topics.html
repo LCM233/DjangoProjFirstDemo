@@ -1,0 +1,21 @@
+{%extends "learning_logs/base.html"%}
+{%load bootstrap3%}
+
+{%block header%}
+    <div>
+        <h1>Topics</h1>
+    </div>
+{%endblock header%}
+
+{%block content%}
+    <ul>
+        {%for topic in topics%}
+        <li>
+        <h4><a href="{%url 'learning_logs:topic' topic.id%}">{{topic}}</a></h4>
+        {%empty%}
+        <h4>No topics have been add yet.</h4>
+        </li>
+        {%endfor%}
+    </ul>
+    <h4 class="text-right"><a href="{%url 'learning_logs:new_topic'%}">+ Add new topic</a></h4>
+{%endblock content%}
